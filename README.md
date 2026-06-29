@@ -6,51 +6,53 @@ This solution demonstrates different approaches to configuring and using `HttpCl
 
 The project showcases three different implementation patterns:
 
-- manual configuration,
-- Microsoft Dependency Injection,
-- Autofac dependency injection.
+- manual configuration
+- Microsoft Dependency Injection
+- Autofac dependency injection
 
 ### Key Concepts Demonstrated
 
-1. **HTTP Message Handler Pipeline**: Shows how to create and chain custom message handlers
-2. **Dependency Injection Patterns**: Compares different DI approaches for `HttpClient` configuration
+1. **HTTP Message Handler Pipeline**: Shows how to configure and chained message handlers
+2. **Dependency Injection Patterns**: Compares different DI approaches for `HttpClient` configuration (including message handlers)
 
 ## 2) Getting Started
 
 1. Clone the repository
-2. Open the solution in Visual Studio 2022
-3. Start the server application (HttpClientDemo.WebApi)
+2. Open the solution in Visual Studio
+3. Start the server application (WebApi)
 4. Run one of the client projects (Right click -> Debug -> Start New Instance)
 
-Each client application targets `https://localhost:7033/Dummy` endpoint and demonstrates the same functionality using different configuration approaches.
+Each client application is:
+
+- adding two custom `DelegatingHandler`s to the `HttpClient` instance
+- calls the  `https://localhost:7033/Demo` endpoint.
 
 ## 3) Solution Structure
 
 ### Client Applications
 
-#### 1. **HttpClientDemo.Client.Simple** (No Dependency Injection)
+#### 1. **Clients.Simple** (No Dependency Injection)
 
 - **Type**: Console Application (.NET 8)
 - **Purpose**: Demonstrates manual `HttpClient` configuration with message handlers, without dependency injection
 
-#### 2. **HttpClientDemo.Client.WithDependencyInjection**
+#### 2. **Clients.WithDependencyInjection**
 
 - **Type**: Console Application (.NET 8)
 - **Purpose**: Shows `HttpClient` configuration using Microsoft's built-in dependency injection
 
-#### 3. **HttpClientDemo.Client.WithAutofac**
+#### 3. **Clients.WithAutofac**
 
 - **Type**: Console Application (.NET 8)
 - **Purpose**: Illustrates `HttpClient` setup with Autofac dependency injection container
 
-### Infrastructure Projects
+### Helper Projects
 
-#### 4. **HttpClientDemo.Handlers**
+#### 4. **Common**
 
 - **Type**: Class Library (.NET 8)
-- **Purpose**: Contains custom HTTP message handlers
+- **Purpose**: Provides a class that calls the server API. 
 - **Components**:
-  - `AuthenticationHandler`: Adds Bearer token authentication to HTTP requests
   - `Dummy1Handler`: Demonstration handler (part of handler pipeline)
   - `Dummy2Handler`: Demonstration handler (part of handler pipeline)
 
